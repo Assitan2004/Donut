@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>La Carte | Homedonut</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+
+    <style>
+        :root {
+            --accent-pink: #f43484; 
+            --text-dark: #1A1A1A;
+            --text-muted: #1a1a1a;
+            --white: #ffffff;
+            --bg-light: #F9F9F9;
+
+            /* Variables ajoutées pour le Chatbot */
+            --chat-gradient: linear-gradient(135deg, #f43484 0%, #ff7eb3 100%);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff;
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- NAVIGATION MODERNE --- */
+        .navbar {
+            padding: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px); /* Effet de verre moderne */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .order-now {
+            background: var(--accent-pink);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .order-now:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(244, 52, 132, 0.2); }
+        .logo-center { 
+    text-align: center; 
+    color: inherit; 
+    flex: 2;
+    transition: var(--transition);
+    /* On retire le text-transform: uppercase pour ne pas écraser le "i" minuscule */
+}
+
+.logo-text { 
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; /* Une graisse moyenne/fine correspond mieux à l'image */
+    font-size: 1.6rem; 
+    letter-spacing: 2px; /* Grand espacement comme sur l'image_d3b0ba.png */
+    display: block;
+    text-transform: none; /* Crucial pour garder le "i" minuscule */
+}
+
+/* Style spécifique pour parfaire le "!" et le "i" */
+.logo-text span {
+    font-weight: 700; /* Légèrement plus épais pour équilibrer le visuel */
+    display: inline-block;
+}
+
+        .logo-subtext { font-size: 10px; letter-spacing: 4px; display: block; opacity: 0.5; font-weight: 700; margin-top: -4px; }
+
+        .nav-right { display: flex; gap: 24px; align-items: center; color: var(--text-dark); }
+        .nav-right span { cursor: pointer; font-variation-settings: 'wght' 300; transition: 0.3s; }
+        .nav-right span:hover { color: var(--accent-pink); }
+
+        /* --- HEADER --- */
+        .shop-header {
+            text-align: center;
+            padding: 2rem 1rem 4rem;
+        }
+
+        .shop-header h1 {
+            font-weight: 800;
+            font-size: clamp(2rem, 7vw, 3rem);
+            letter-spacing: -2px;
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+        }
+
+        .delivery-options {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 2.5rem;
+        }
+
+        .opt-btn {
+            border: 1.5px solid #F0F0F0;
+            padding: 12px 32px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            cursor: pointer;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .opt-btn:hover { border-color: var(--accent-pink); color: var(--accent-pink); }
+
+        .filter-bar {
+            display: flex;
+            background: #F8F8F8;
+            padding: 6px;
+            border-radius: 100px;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .filter-item {
+            padding: 12px 30px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .filter-item.active {
+            background: white;
+            color: var(--text-dark);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 100px 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem 10rem;
+        }
+
+        .product-card {
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1px;
+            position: relative;
+            background: #FFF; /* Fond très léger pour faire ressortir l'objet */
+            border-radius: 24px;
+        }
+
+        .product-image {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .product-card:hover .product-image { transform: scale(1.1) translateY(-10px); }
+
+        .favorite-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            color: #DDD;
+            transition: 0.3s;
+        }
+
+        .favorite-btn:hover { color: var(--accent-pink); }
+
+        .seasonal-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--text-dark);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-card h3 {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 2px;
+        }
+
+        .product-price {
+            font-weight: 800;
+            color: var(--accent-pink);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            max-width: 260px;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .add-to-cart {
+            background: var(--text-dark);
+            border: none;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 100px;
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .add-to-cart:hover { background: var(--accent-pink); transform: translateY(-3px); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+/* --- ADAPTATION MOBILE (COLONNE UNIQUE ET TAILLE) --- */
+@media (max-width: 650px) {
+    /* Assure que la grille est bien en colonne unique */
+    .product-grid { 
+        grid-template-columns: 1fr; 
+        gap: 30px; 
+        padding: 0 1rem 4rem; 
+    }
+
+    /* Réduit la taille du titre */
+    .shop-header h1 { 
+        font-size: 1.8rem; 
+        margin-bottom: 1.5rem; 
+    }
+
+    /* Ajuste la taille du texte des cartes pour le mobile */
+    .product-card h3 { 
+        font-size: 1.2rem; 
+    }
+
+    .product-desc { 
+        font-size: 0.8rem; 
+        margin-bottom: 15px; 
+    }
+
+    /* Adapte le bouton d'ajout au panier */
+    .add-to-cart {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+        padding: 12px 10px;
+        font-size: 0.6rem;
+    }
+
+    /* Assure que l'image ne soit pas trop grande */
+    .image-container {
+        max-width: 250px;
+        margin: 0 auto 10px auto;
+    }
+}
+        /* --- OPTIMISATION NAV MOBILE --- */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    /* On cache le bouton "Commander" sur mobile pour laisser de la place au logo */
+    .order-now {
+        display: none;
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+    }
+
+    .nav-right {
+        gap: 15px;
+    }
+}
+
+/* --- OPTIMISATION GRILLE PRODUITS --- */
+@media (max-width: 1100px) {
+    .product-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 60px 20px; 
+        padding-bottom: 5rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .product-grid { 
+        gap: 40px;
+    }
+
+    .shop-header h1 { 
+        font-size: 1.8rem; 
+        margin-bottom: 2rem;
+    }
+
+    /* Défilement horizontal pour les filtres sur mobile */
+    .filter-bar {
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        border-radius: 0;
+        background: transparent;
+        padding: 10px 20px;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .filter-bar::-webkit-scrollbar { display: none; } /* Cache la barre de scroll */
+
+    .filter-item {
+        white-space: nowrap; /* Empêche le texte de revenir à la ligne */
+        background: #F8F8F8;
+        margin-right: 8px;
+    }
+
+    .delivery-options {
+        flex-direction: row;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .opt-btn {
+        flex: 1;
+        padding: 10px 10px;
+        font-size: 0.7rem;
+    }
+}
+
+/* --- AJUSTEMENT DES CARTES PRODUITS --- */
+.product-card {
+    width: 100%;
+}
+
+.image-container {
+    transition: 0.3s ease;
+}
+
+@media (max-width: 480px) {
+    .product-desc {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+    
+    .add-to-cart {
+        width: 90%;
+        justify-content: center;
+    }
+}
+
+.logo-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- LA PETITE CARTE MENU (MODERNE) --- */
+/* --- LA CARTE MENU --- */
+.mobile-nav-card {
+    position: fixed;
+    top: 80px; 
+    left: 20px;
+    width: 260px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    z-index: 2000;
+    padding: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav-card.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.card-inner { display: flex; flex-direction: column; gap: 4px; }
+
+.card-link {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 12px 16px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.order-highlight {
+    background: var(--accent-pink);
+    color: white !important;
+}
+
+.card-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.06);
+    margin: 8px 12px;
+}
+
+/* --- RESPONSIVE LOGIQUE --- */
+.mobile-only { display: none; } /* Caché sur PC */
+.menu-trigger { cursor: pointer; font-size: 32px; }
+
+@media (max-width: 768px) {
+    /* Cache favoris et panier de la barre de droite */
+    .desktop-only { 
+        display: none !important; 
+    }
+    
+    /* Affiche favoris et panier dans la carte menu */
+    .mobile-only { 
+        display: flex; 
+    }
+
+    .nav-container { padding: 0 1.2rem; }
+    .logo-text { font-size: 1.2rem; }
+}
+
+/* --- LOGIQUE RESPONSIVE --- */
+.menu-trigger { cursor: pointer; }
+
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important; /* Cache 'Commander' et 'Coeur' sur mobile */
+    }
+    
+    .nav-container {
+        padding: 0 1.5rem;
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+    }
+}
+
+/* --- LOGIQUE D'AFFICHAGE SMARTPHONE --- */
+
+/* Par défaut, on cache les éléments destinés au menu mobile */
+.mobile-only {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    /* 1. On cache le bouton Commander et le Coeur de la barre principale */
+    .order-now, 
+    .nav-right .material-symbols-outlined:not(:last-child) { 
+        display: none !important; 
+    }
+
+    /* 2. On affiche ces éléments à l'intérieur du Drawer */
+    .mobile-only {
+        display: flex !important;
+    }
+
+    /* Ajustement de la Navbar pour laisser de la place au logo */
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .logo-text {
+        font-size: 1.2rem;
+    }
+}
+
+/* Style spécifique pour le bouton commander dans le menu */
+.order-mobile-btn {
+    color: var(--accent-pink) !important;
+    font-weight: 800;
+}
+
+/* Sécurité pour le scroll sur mobile si le menu est ouvert */
+body.menu-open {
+    overflow: hidden;
+}
+        /* --- FOOTER --- */
+        .site-footer {
+            background-color: #f43484; 
+            color: #ffffff;
+            padding: 80px 0 40px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin-top: 50px;
+        }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: start;
+        }
+
+        .footer-logo .logo-text { font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; display: block; line-height: 1.7; }
+        .footer-logo .logo-subtext { font-size: 10px; letter-spacing: 2px; opacity: 0.9; text-transform: uppercase; }
+        .footer-tagline { font-size: 14px; margin: 20px 0; line-height: 1.6; max-width: 300px; opacity: 0.9; }
+
+        .footer-socials { display: flex; gap: 12px; }
+        .social-link {
+            width: 40px; height: 40px; background: #ffffff; color: #f43484 !important;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: 0.3s ease;
+        }
+        .social-link:hover { transform: translateY(-5px); background: #1A1A1A; color: #fff !important; }
+
+        .footer-heading { font-size: 16px; font-weight: 700; margin-bottom: 25px; position: relative; padding-bottom: 10px; }
+        .footer-heading::after { content: ''; position: absolute; left: 0; bottom: 0; width: 30px; height: 2px; background: #ffffff; }
+
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: #ffffff; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 10px; opacity: 0.9; transition: 0.3s; }
+        .footer-links a:hover { opacity: 1; padding-left: 5px; }
+
+        .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 18px; font-size: 14px; }
+        .info-item span { background: rgba(255,255,255,0.2); padding: 8px; border-radius: 50%; font-size: 18px; }
+
+        .news-text { font-size: 14px; margin-bottom: 20px; opacity: 0.9; }
+        .newsletter-group { display: flex; background: #ffffff; border-radius: 50px; padding: 5px 5px 5px 20px; align-items: center; }
+        .news-input { flex: 1; border: none; background: none; outline: none; padding: 10px 0; font-size: 14px; color: #333; }
+        .news-btn { background: #f43484; color: #ffffff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .news-btn:hover { background: #1A1A1A; }
+
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.2); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .footer-legal a { color: #fff; text-decoration: none; margin-left: 20px; opacity: 0.8; }
+        .footer-legal a:hover { opacity: 1; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 50px; }
+        }
+        @media (max-width: 768px) {
+            .site-footer { padding: 60px 0 30px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .footer-logo, .footer-heading::after { display: flex; flex-direction: column; align-items: center; }
+            .footer-heading::after { left: 50%; transform: translateX(-50%); }
+            .footer-tagline { margin: 20px auto; }
+            .footer-socials, .footer-links a, .info-item, .newsletter-group { justify-content: center; }
+            .info-item { flex-direction: column; gap: 5px; }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+            .footer-legal { display: flex; flex-direction: column; gap: 10px; }
+            .footer-legal a { margin: 0; }
+        }
+
+
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-footer { padding: 60px 0 30px; }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .footer-logo, .footer-heading::after {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-heading::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-tagline { margin: 20px auto; }
+    
+    .footer-socials, .footer-links a, .info-item, .newsletter-group {
+        justify-content: center;
+    }
+    
+    .info-item { flex-direction: column; gap: 5px; }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .footer-legal a { margin: 0; }
+}
+
+
+    </style>
+</head>
+<body>
+
+<div id="mobileDrawer" class="mobile-nav-card">
+        <div class="card-inner">
+            <a href="index.html" class="card-link">
+                <span class="material-symbols-outlined">home</span>Accueil
+            </a>
+            <a href="donut.html" class="card-link"style="background: var(--accent-pink); color: white; margin-top: 5px;">
+                <span class="material-symbols-outlined">restaurant_menu</span>La Carte
+            </a>
+            <a href="panier.html" class="card-link">
+                <span class="material-symbols-outlined">shopping_bag</span>Mon Panier
+            </a>
+            <a href="histoire.html" class="card-link">
+                <span class="material-symbols-outlined">history_edu</span>Histoire
+            </a>
+            <a href="evenement.html" class="card-link">
+                <span class="material-symbols-outlined">celebration</span>Evènement
+            </a>
+
+              <a href="favoris.html" class="card-link">
+                <span class="material-symbols-outlined">favorite</span>Favoris
+            </a>
+
+            <a href="#" class="card-link" >
+                <span class="material-symbols-outlined">shopping_cart_checkout</span>Commander
+            </a>
+        </div>
+    </div>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-left">
+            <span class="material-symbols-outlined menu-trigger" id="openBtn">menu</span>
+        </div>
+        
+         <div class="logo-center">
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+        <!-- Remplacement de ChezBiskuit pour matcher exactement l'image -->
+        <span class="logo-text" style="line-height: 1.7;">B<span>!</span>SKU<span>i</span>T</span>
+        <span class="logo-subtext">HAUTE BEIGNETERIE</span>
+    </a>
+</div>
+
+        <div class="nav-right">
+            <a href="favoris.html"><span class="material-symbols-outlined desktop-only" style="color: #1A1A1A;">favorite</span></a>  
+            <a href="panier.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">shopping_bag</span></a>
+            <a href="connexion.html" style="color: inherit;"><span class="material-symbols-outlined">person</span></a>
+        </div>
+    </div>
+</nav>
+    <header class="shop-header">
+      <div class="delivery-options">
+            <div class="opt-btn">À emporter</div>
+            <div class="opt-btn">Livraison</div>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-item active">Tous les Donuts</div>
+            <div class="filter-item">Brioche</div>
+            <div class="filter-item">Vegan</div>
+            <div class="filter-item">Café</div>
+        </div>
+    </header>
+
+ <main class="product-grid" id="products-grid">
+        
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <img src="image/d8.jpg" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(1, 'Marshmallow Croustillant', 5.50, 'image/d8.jpg')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <span class="seasonal-tag">Saisonnier</span>
+                <img src="image/d2.jpg" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(2, 'Marshmallow Croustillant', 5.50, 'image/d2.jpg')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <span class="seasonal-tag">Saisonnier</span>
+                <img src="image/d7_modifie.png" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(3, 'Marshmallow Croustillant', 5.50, 'image/d7_modifie.png')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <span class="seasonal-tag">Saisonnier</span>
+                <img src="image/d11_modifie.png" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(4, 'Marshmallow Croustillant', 5.50, 'image/d11_modifie.png')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <span class="seasonal-tag">Saisonnier</span>
+                <img src="image/d9_modifie.png" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(5, 'Marshmallow Croustillant', 5.50, 'image/d9_modifie.png')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <img src="image/d3.png" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(6, 'Marshmallow Croustillant', 5.50, 'image/d3.png')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <img src="image/d8.jpg" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(7, 'Marshmallow Croustillant', 5.50, 'image/d8.jpg')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <img src="image/d2.jpg" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(8, 'Marshmallow Croustillant', 5.50, 'image/d2.jpg')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <img src="image/d7_modifie.png" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(9, 'Marshmallow Croustillant', 5.50, 'image/d7_modifie.png')">
+                Ajouter au panier
+            </button>
+        </div>
+
+         <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <span class="seasonal-tag">Saisonnier</span>
+                <img src="image/M1.jpg" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(5, 'Marshmallow Croustillant', 5.50, 'image/d9_modifie.png')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <img src="image/M1.jpg" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(6, 'Marshmallow Croustillant', 5.50, 'image/d3.png')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <img src="image/M1.jpg" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(7, 'Marshmallow Croustillant', 5.50, 'image/d8.jpg')">
+                Ajouter au panier
+            </button>
+        </div>
+
+         <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <span class="seasonal-tag">Saisonnier</span>
+                <img src="image/bt1.jpg" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(5, 'Marshmallow Croustillant', 5.50, 'image/d9_modifie.png')">
+
+               Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <img src="image/bt1.jpg" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(6, 'Marshmallow Croustillant', 5.50, 'image/d3.png')">
+                Ajouter au panier
+            </button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <button class="favorite-btn">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <img src="image/bt1.jpg" class="product-image" alt="Marshmallow">
+            </div>
+            <h3>Marshmallow Croustillant</h3>
+            <div class="product-price">5.50€</div>
+            <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
+            <button class="add-to-cart" onclick="ajouterAuPanier(7, 'Marshmallow Croustillant', 5.50, 'image/d8.jpg')">
+                Ajouter au panier
+            </button>
+        </div>
+    
+        
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            
+            <div class="footer-col branding">
+                <div class="footer-logo">
+ <a href="index.html" style="text-decoration: none; color: inherit;">
+        <!-- Remplacement de ChezBiskuit pour matcher exactement l'image -->
+        <span class="logo-text" style="line-height: 1.7;">B<span>!</span>SKU<span>i</span>T</span>
+    </a>
+                    <span class="logo-subtext">HAUTE BEIGNETERIE</span>
+                </div>
+                <p class="footer-tagline">L'art du donut artisanal, façonné à la main chaque matin pour vos moments d'exception.</p>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/biskuit_conflans/reels/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@homedonutsconflans" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-snapchat"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">La Maison</h4>
+                <ul class="footer-links">
+                    <li><a href="donut.html"><span class="material-symbols-outlined">chevron_right</span>La Collection</a></li>
+                    <li><a href="histoire.html"><span class="material-symbols-outlined">chevron_right</span>Notre Atelier</a></li>
+                    <li><a href="evenement.html"><span class="material-symbols-outlined">chevron_right</span>Privatisation</a></li>
+                    <li><a href="#"><span class="material-symbols-outlined">chevron_right</span>Devenir Franchisé</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Contact</h4>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <span class="material-symbols-outlined">location_on</span>
+                        <p>42 Av. Carnot, Conflans-Sainte-Honorine</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="material-symbols-outlined">schedule</span>
+                        <p>Mar - Dim : 10h00 - 19h00</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="material-symbols-outlined">mail</span>
+                        <p>bonjour@Chez Biscuit.fr</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Newsletter</h4>
+                <p class="news-text">Rejoignez le club pour recevoir nos créations éphémères en avant-première.</p>
+                <div class="newsletter-group">
+                    <input type="email" placeholder="Votre adresse mail..." class="news-input">
+                    <button class="news-btn">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Chez Biscuit. Créé avec passion.</p>
+            <div class="footer-legal">
+                <a href="#">CGV</a>
+                <a href="#">Politique de cookies</a>
+                <a href="#">Mentions</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+const openBtn = document.getElementById('openBtn');
+const drawer = document.getElementById('mobileDrawer');
+
+openBtn.onclick = (e) => {
+    e.stopPropagation(); // Empêche la fermeture immédiate
+    drawer.classList.toggle('active');
+};
+
+// Fermer la carte si on clique n'importe où ailleurs
+document.addEventListener('click', (e) => {
+    if (!drawer.contains(e.target) && e.target !== openBtn) {
+        drawer.classList.remove('active');
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    // ---- MENU MOBILE ----
+    const openBtn = document.getElementById('openBtn');
+    const drawer = document.getElementById('mobileDrawer');
+
+    openBtn.onclick = (e) => {
+        e.stopPropagation();
+        drawer.classList.toggle('active');
+    };
+
+    document.addEventListener('click', (e) => {
+        if (!drawer.contains(e.target) && e.target !== openBtn) {
+            drawer.classList.remove('active');
+        }
+    });
+
+    // ---- LOGIQUE INTERACTIVE DU CHATBOT ----
+    const chatbotToggler = document.querySelector(".chatbot-toggler");
+    const iconChat = document.querySelector(".icon-chat");
+    const iconClose = document.querySelector(".icon-close");
+    const chatInput = document.querySelector(".chat-input textarea");
+    const sendChatBtn = document.querySelector("#send-btn");
+    const chatbox = document.querySelector(".chatbox");
+
+    chatbotToggler.addEventListener("click", () => {
+        document.body.classList.toggle("show-chatbot");
+        
+        if (document.body.classList.contains("show-chatbot")) {
+            iconChat.style.display = "none";
+            iconClose.style.display = "block";
+        } else {
+            iconChat.style.display = "block";
+            iconClose.style.display = "none";
+        }
+    });
+
+    const createChatLi = (message, className) => {
+        const chatLi = document.createElement("li");
+        chatLi.classList.add("chat", className);
+        chatLi.innerHTML = `<p>${message}</p>`;
+        return chatLi;
+    }
+
+    const handleChat = () => {
+        const userMessage = chatInput.value.trim();
+        if(!userMessage) return;
+        chatInput.value = "";
+
+        chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+
+        setTimeout(() => {
+            const incomingChatLi = createChatLi("Je prépare votre réponse... ✨", "incoming");
+            chatbox.appendChild(incomingChatLi);
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+
+            setTimeout(() => {
+                incomingChatLi.querySelector("p").textContent = "C'est noté ! Un de nos chefs pâtissiers va vous répondre d'ici quelques instants. En attendant, nos donuts Mms sont en promotion ! 🍩";
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+            }, 1000);
+        }, 500);
+    }
+
+    sendChatBtn.addEventListener("click", handleChat);
+    
+    chatInput.addEventListener("keydown", (e) => {
+        if(e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleChat();
+        }
+    });
+});
+
+function ajouterAuPanier(id, nom, prix, image) {
+    // Récupère le panier existant ou crée un nouveau
+    let panier = JSON.parse(localStorage.getItem("panier") || "[]");
+    
+    // Vérifie si le produit est déjà dans le panier
+    const index = panier.findIndex(item => item.id === id);
+    
+    if (index !== -1) {
+        panier[index].quantite += 1;
+    } else {
+        panier.push({ id, nom, prix, image, quantite: 1 });
+    }
+    
+    localStorage.setItem("panier", JSON.stringify(panier));
+    
+    // Message de confirmation
+    const msg = document.createElement("div");
+    msg.textContent = `✅ ${nom} ajouté au panier !`;
+    msg.style.cssText = `
+        position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+        background: #1A1A1A; color: white; padding: 14px 28px;
+        border-radius: 100px; font-weight: 700; font-size: 0.85rem;
+        z-index: 9999;
+    `;
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 2500);
+}
+
+// ---- MENU UTILISATEUR ----
+const user = JSON.parse(localStorage.getItem("user"));
+const userBtn = document.getElementById("userBtn");
+const userDropdown = document.getElementById("userDropdown");
+const userGreeting = document.getElementById("userGreeting");
+
+if (user) {
+    userBtn.innerText = "account_circle";
+    userGreeting.innerText = "Bonjour, " + user.prenom + " ";
+    userGreeting.style.color = "#1a1a1a";
+    userGreeting.style.fontSize = "14px";
+}
+
+userBtn.onclick = (e) => {
+    e.stopPropagation();
+    userDropdown.style.display = userDropdown.style.display === "none" ? "block" : "none";
+};
+
+document.addEventListener("click", () => {
+    userDropdown.style.display = "none";
+});
+
+document.getElementById("logoutBtn").onclick = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("user");
+    window.location.href = "connexion.html";
+};
+</script>
+</body>
+</html>

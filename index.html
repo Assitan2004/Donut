@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Chez Biscuit | Salon de thé </title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+
+    <style>
+        :root {
+            --accent-pink: #f43484; 
+            --text-dark: #1A1A1A;
+            --white: #ffffff;
+            --border-soft: rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fff;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- HEADER & VIDEO --- */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden;
+        }
+
+        .video-bg { 
+            position: absolute; 
+            inset: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            z-index: -1; 
+        }
+
+        .header-overlay-dark { 
+            position: absolute; 
+            inset: 0; 
+            background: rgba(0, 0, 0, 0.25); 
+            z-index: 0; 
+        }
+
+        /* --- NAVBAR --- */
+       
+
+        .navbar.scrolled {
+            padding: 0.8rem 0;
+            background: rgba(255, 255, 255, 0.7);
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-left { flex: 1; }
+        .menu-trigger { cursor: pointer; font-size: 28px !important; color: var(--text-dark); transition: 0.3s;font-weight: 400; }
+.logo-center { 
+    text-align: center; 
+    color: inherit; 
+    flex: 2;
+    transition: var(--transition);
+    /* On retire le text-transform: uppercase pour ne pas écraser le "i" minuscule */
+}
+
+.logo-text { 
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem; 
+    letter-spacing: 2px;
+    display: block;
+    text-transform: none;
+}
+
+/* Style spécifique pour parfaire le "!" et le "i" */
+.logo-text span {
+    font-weight: 700; /* Légèrement plus épais pour équilibrer le visuel */
+    display: inline-block;
+}
+        .logo-subtext { font-size: 10px; letter-spacing: 4px; display: block; opacity: 0.6; font-weight: 700; margin-top: -4px; text-transform: uppercase; }
+        .nav-right { display: flex; gap: 24px; align-items: center; color: #000; flex: 1; justify-content: flex-end; }
+/* --- NAVBAR (ÉTAT INITIAL : TRANSPARENT & BLANC) --- */
+.navbar {
+    padding: 1.5rem 0;
+    background: transparent; /* Pas de fond au début */
+    position: fixed;
+    top: 0; 
+    width: 100%; 
+    z-index: 2000;
+    transition: var(--transition);
+    color: #ffffff; /* Texte et icônes en blanc par défaut */
+}
+
+/* --- ÉTAT AU SCROLL (DEVIENT BLANC & NOIR) --- */
+.navbar.scrolled {
+    padding: 0.8rem 0;
+    background: rgb(255, 255, 255,0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid transparent;
+    color: var(--text-dark); /* Le texte passe en noir via l'héritage */
+}
+
+/* On force le changement de couleur pour les éléments spécifiques */
+.navbar.scrolled .logo-center,
+.navbar.scrolled .menu-trigger,
+.navbar.scrolled .nav-right {
+    color: var(--text-dark);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.nav-left { flex: 1; }
+
+/* Couleur héritée pour l'icône menu */
+.menu-trigger { 
+    cursor: pointer; 
+    font-size: 32px !important; 
+    color: inherit; 
+    transition: 0.3s;
+}
+
+.logo-center { 
+    text-align: center; 
+    color: inherit; 
+    flex: 2;
+    transition: var(--transition);
+    text-transform: uppercase;
+}
+
+.nav-right { 
+    display: flex; 
+    gap: 24px; 
+    align-items: center; 
+    color: inherit; 
+    flex: 1; 
+    justify-content: flex-end;
+}
+/* Couleur initiale de l'icône dans la navbar transparente */
+.navbar .nav-right a .material-symbols-outlined {
+    color: #ffffff;
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Couleur de l'icône une fois que la navbar a la classe .scrolled */
+.navbar.scrolled .nav-right a .material-symbols-outlined {
+    color: var(--text-dark); /* Devient noir (#1A1A1A) */
+}
+        /* --- HERO CONTENT --- */
+        .hero-content { 
+            position: relative; 
+            z-index: 10; 
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .hero-title { 
+            font-size: clamp(2.5rem, 7vw, 5.5rem); 
+            font-weight: 800;
+            color: #fff; 
+            line-height: 1.1; 
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .hero-subtitle { 
+            font-size: 1.2rem; 
+            color: #fff; 
+            max-width: 650px; 
+            margin: 0 auto 3rem auto; 
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+        .btn-primary-solid { background: var(--accent-pink); color: white; padding: 18px 40px; border-radius: 100px; font-weight: 700; border: none; text-decoration: none; transition: 0.3s; }
+        .btn-outline-white { border: 2px solid white; color: white; padding: 18px 40px; border-radius: 100px; font-weight: 700; display: flex; align-items: center; gap: 10px; cursor: pointer; background: transparent; transition: 0.3s; }
+
+        /* --- GRID & IMAGES --- */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+
+        .bakery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .pastry-card {
+            background: var(--white);
+            overflow: hidden;
+            border-radius: 20px;
+            position: relative;
+            /* Empêche les clics fantômes sur mobile */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .image-container {
+            background-color: #fff;
+            aspect-ratio: 1/1;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .pastry-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* --- OVERLAY (CACHÉ PAR DÉFAUT) --- */
+        .overlay-voir-plus {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; /* Caché */
+            visibility: hidden;
+            transition: all 0.4s ease;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 5;
+        }
+
+        .overlay-voir-plus p {
+            font-weight: 700;
+            color: var(--text-dark);
+            transform: translateY(10px);
+            transition: transform 0.4s ease;
+        }
+
+        .btn-plus {
+            background: var(--text-dark);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        /* AFFICHAGE AU HOVER (PC) ET AU TOUCH (MOBILE) */
+        .pastry-card:hover .overlay-voir-plus,
+        .pastry-card:active .overlay-voir-plus {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .pastry-card:hover .overlay-voir-plus p {
+            transform: translateY(0);
+        }
+
+        .pastry-card:hover .pastry-image {
+            transform: scale(1.1);
+        }
+
+        /* --- MOBILE DRAWER --- */
+        .mobile-nav-card {
+            position: fixed;
+            top: 85px; left: 20px;
+            width: 260px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            z-index: 3000;
+            padding: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+        }
+        .mobile-nav-card.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .card-link { text-decoration: none; color: var(--text-dark); font-weight: 600; padding: 12px 16px; border-radius: 16px; display: flex; align-items: center; gap: 12px; }
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 1024px) {
+            .bakery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { padding: 0 1.2rem; }
+            .hero-title { font-size: 2.8rem; }
+            .bakery-grid { grid-template-columns: 1fr; }
+            .desktop-only { display: none !important; }
+            
+            /* On s'assure que l'overlay n'est PAS visible par défaut ici */
+            .overlay-voir-plus {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+   /* --- SECTION FAQ EN ENTIER --- */
+.faq-section {
+    padding: 100px 0;
+    background-color: #fff; /* Fond légèrement grisé pour détacher la section */
+}
+
+.container-small {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Titre de la FAQ */
+.faq-section h2.serif {
+    text-align: center;
+    margin-bottom: 50px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+/* Conteneur de chaque question */
+.faq-item {
+    background-color: #ffffff;
+    border-bottom:  1px solid var(--border-soft);
+    border-radius: 16px; /* Bords arrondis modernes */
+    margin-bottom: 5px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: var(--border-soft); /* Bordure rose au survol */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* Style du bouton de la question */
+.faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: color 0.3s ease;
+}
+
+/* Icône flèche (Expand More) */
+.faq-question .material-symbols-outlined {
+    color: #1A1A1A;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 28px;
+}
+
+/* État quand la question est ouverte */
+.faq-item.active {
+    border-color: var(--border-soft);
+}
+
+.faq-item.active .faq-question {
+    color: #1A1A1A;
+}
+
+.faq-item.active .material-symbols-outlined {
+    transform: rotate(180deg); /* La flèche se tourne vers le haut */
+}
+
+/* Conteneur de la réponse (Accordéon) */
+.faq-answer {
+    max-height: 0; /* Caché par défaut */
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0, 1, 0, 1); /* Animation fluide */
+    background-color: #fff;
+}
+
+.faq-answer p {
+    padding: 0 30px 30px 30px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #000;
+}
+
+/* Quand l'item a la classe active (via JS), on affiche la réponse */
+.faq-item.active .faq-answer {
+    max-height: 500px; /* Hauteur max suffisante pour le contenu */
+    transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+}
+
+/* RESPONSIVE FAQ */
+@media (max-width: 768px) {
+    .faq-section {
+        padding: 60px 0;
+    }
+    
+    .faq-section h2.serif {
+        font-size: 2rem;
+    }
+
+    .faq-question {
+        padding: 20px;
+        font-size: 1rem;
+    }
+
+    .faq-answer p {
+        padding: 0 20px 20px 20px;
+        font-size: 0.95rem;
+    }
+}
+
+       /* --- FOOTER --- */
+        .site-footer {
+            background-color: #f43484; 
+            color: #ffffff;
+            padding: 80px 0 40px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin-top: 50px;
+        }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: start;
+        }
+
+        .footer-logo .logo-text { font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; display: block; line-height: 1.5; }
+        .footer-logo .logo-subtext { font-size: 10px; letter-spacing: 2px; opacity: 0.9;  }
+        .footer-tagline { font-size: 14px; margin: 20px 0; line-height: 1.6; max-width: 300px; opacity: 0.9; }
+
+        .footer-socials { display: flex; gap: 12px; }
+        .social-link {
+            width: 40px; height: 40px; background: #ffffff; color: #f43484 !important;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: 0.3s ease;
+        }
+        .social-link:hover { transform: translateY(-5px); background: #1A1A1A; color: #fff !important; }
+
+        .footer-heading { font-size: 16px; font-weight: 700; margin-bottom: 25px; position: relative; padding-bottom: 10px; }
+        .footer-heading::after { content: ''; position: absolute; left: 0; bottom: 0; width: 30px; height: 2px; background: #ffffff; }
+
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: #ffffff; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 10px; opacity: 0.9; transition: 0.3s; }
+        .footer-links a:hover { opacity: 1; padding-left: 5px; }
+
+        .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 18px; font-size: 14px; }
+        .info-item span { background: rgba(255,255,255,0.2); padding: 8px; border-radius: 50%; font-size: 18px; }
+
+        .news-text { font-size: 14px; margin-bottom: 20px; opacity: 0.9; }
+        .newsletter-group { display: flex; background: #ffffff; border-radius: 50px; padding: 5px 5px 5px 20px; align-items: center; }
+        .news-input { flex: 1; border: none; background: none; outline: none; padding: 10px 0; font-size: 14px; color: #333; }
+        .news-btn { background: #f43484; color: #ffffff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .news-btn:hover { background: #1A1A1A; }
+
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.2); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .footer-legal a { color: #fff; text-decoration: none; margin-left: 20px; opacity: 0.8; }
+        .footer-legal a:hover { opacity: 1; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 50px; }
+        }
+        @media (max-width: 768px) {
+            .site-footer { padding: 60px 0 30px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .footer-logo, .footer-heading::after { display: flex; flex-direction: column; align-items: center; }
+            .footer-heading::after { left: 50%; transform: translateX(-50%); }
+            .footer-tagline { margin: 20px auto; }
+            .footer-socials, .footer-links a, .info-item, .newsletter-group { justify-content: center; }
+            .info-item { flex-direction: column; gap: 5px; }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+            .footer-legal { display: flex; flex-direction: column; gap: 10px; }
+            .footer-legal a { margin: 0; }
+        }
+
+/* --- FOOTER RESPONSIVE OPTIMISÉ --- */
+.site-footer {
+    background-color: #f43484; /* Ton rose exact */
+    color: #ffffff;
+    padding: 80px 0 40px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin-top: 50px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 1fr 1.2fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 60px;
+}
+
+.footer-logo .logo-text {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    display: block;
+    color: #fff;
+}
+
+.footer-logo .logo-subtext {
+    font-size: 10px;
+    letter-spacing: 2px;
+    opacity: 0.8;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    margin: 20px 0;
+    line-height: 1.5;
+    max-width: 300px;
+}
+
+.footer-heading {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 30px;
+    height: 2px;
+    background: #fff;
+}
+
+.footer-links { list-style: none; padding: 0; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a { 
+    color: #fff; 
+    text-decoration: none; 
+    font-size: 14px; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    transition: 0.3s;
+}
+.footer-links a:hover { opacity: 0.7; transform: translateX(5px); }
+
+.info-item { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; font-size: 14px; }
+.info-item span { background: rgba(255,255,255,0.2); padding: 6px; border-radius: 50%; font-size: 18px; }
+
+/* Newsletter - Style Pill */
+.newsletter-group {
+    display: flex;
+    background: #fff;
+    border-radius: 50px;
+    padding: 5px;
+    margin-top: 15px;
+    max-width: 100%;
+}
+.news-input {
+    flex: 1;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50px;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+}
+.news-btn {
+    background: #f43484;
+    color: #fff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+.news-btn:hover { background: #1A1A1A; }
+
+/* Réseaux Sociaux */
+.footer-socials { display: flex; gap: 12px; margin-top: 20px; }
+.social-link {
+    width: 38px;
+    height: 38px;
+    background: #fff;
+    color: #f43484 !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.social-link:hover { transform: translateY(-3px); background: #1A1A1A; color: #fff !important; }
+
+/* Bas de page */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+.footer-legal a { color: #fff; text-decoration: none; margin-left: 15px; }
+
+/* --- MEDIA QUERIES (Le coeur du Responsive) --- */
+
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr; /* 2 colonnes sur tablette */
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-footer { padding: 60px 0 30px; }
+    
+    .footer-grid {
+        grid-template-columns: 1fr; /* 1 colonne sur mobile */
+        text-align: center;
+        gap: 40px;
+    }
+
+    .footer-tagline { margin: 20px auto; }
+    
+    .footer-heading::after {
+        left: 50%;
+        transform: translateX(-50%); /* Centre le trait sous le titre */
+    }
+
+    .footer-links a, .info-item {
+        justify-content: center; /* Centre les liens et infos de contact */
+    }
+
+    .footer-socials {
+        justify-content: center;
+    }
+
+    .newsletter-group {
+        max-width: 350px;
+        margin: 15px auto;
+    }
+
+    .footer-bottom {
+        flex-direction: column; /* Empile le copyright et les mentions légales */
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer-legal a {
+        margin: 0 10px;
+    }
+}
+/* --- STYLE LOGO IMAGE --- */
+/* --- STYLE LOGO IMAGE --- */
+.logo-img {
+    height: 100px; /* Taille initiale (grande) */
+    width: 350px;
+    transition: all 0.4s ease; /* Animation fluide de la taille */
+    display: block;
+    margin: 0 auto;
+    object-fit: cover; /* Important : évite de déformer l'image */
+}
+
+/* TAILLE RÉDUITE AU SCROLL */
+.navbar.scrolled .logo-img {
+    height: 80px; /* Taille une fois qu'on a scrollé */
+     width: 270px;
+
+}
+
+/* Visibilité des logos */
+.navbar .logo-dark { display: none; }
+.navbar .logo-light { display: block; }
+
+.navbar.scrolled .logo-light { display: none; }
+.navbar.scrolled .logo-dark { display: block; }
+
+/* Ajustement mobile (pour ne pas prendre tout l'écran) */
+@media (max-width: 768px) {
+    .logo-img {
+        height: 60px;
+    }
+    .navbar.scrolled .logo-img {
+        height: 40px;
+    }
+}
+.fade-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px; /* Ajustez cette hauteur si vous voulez un dégradé plus ou moins long */
+    background: linear-gradient(to top, rgba(255,255,255,1) 15%, rgba(255,255,255,0) 100%);
+    pointer-events: none; /* Laisse passer les clics au cas où des boutons seraient dessous */
+    z-index: 15; /* S'assure que le dégradé passe bien au-dessus de la vidéo */
+}
+
+/* --- VERSION FINALE CHATBOT RESPONSIVE --- */
+@media (max-width: 650px) {
+    body.show-chatbot {
+        overflow: hidden !important; /* Empêche le site de défiler derrière le chat */
+    }
+
+    .chatbot {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100vh !important; /* Force à prendre la hauteur totale réelle de l'écran */
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+        border: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        z-index: 99999 !important; /* S'assure que rien ne passe par-dessus */
+        background: #fff !important; /* Force le fond blanc opaque pour cacher les donuts derrière */
+    }
+
+    .chatbot header {
+        flex-shrink: 0 !important;
+    }
+
+    .chatbot .chatbox {
+        flex: 1 !important; /* Force la boîte à occuper 100% de l'espace vide disponible */
+        height: auto !important;
+        overflow-y: auto !important;
+        padding: 20px !important;
+    }
+
+    .chatbot .chat-input {
+        flex-shrink: 0 !important;
+        background: #fff !important;
+        border-top: 1px solid rgba(0,0,0,0.08) !important;
+        padding: 15px 20px !important;
+    }
+}
+    </style>
+</head>
+<body>
+
+<header class="hero-section">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="image/donut.mp4" type="video/mp4">
+    </video>
+    <div class="header-overlay-dark"></div>
+
+    <nav class="navbar" id="mainNavbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <span class="material-symbols-outlined menu-trigger" id="openBtn">menu</span>
+            </div>
+      <div class="logo-center">
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+        <!-- Remplacement de ChezBiskuit pour matcher exactement l'image -->
+        <span class="logo-text" style="line-height: 1.7;">B<span>!</span>SKU<span>i</span>T</span>
+        <span class="logo-subtext">HAUTE BEIGNETERIE</span>
+    </a>
+</div>
+            <div class="nav-right">
+<a href="favoris.html">
+    <span class="material-symbols-outlined desktop-only">favorite</span>
+</a>
+                <a href="panier.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">shopping_bag</span></a>
+<div class="user-menu-wrapper" style="position: relative;">
+     <a href="connexion.html" style="color: inherit;"><span class="material-symbols-outlined" id="userBtn" style="cursor:pointer;">person</span></a>
+  
+</div>    
+    </div>
+        </div>
+    </nav>
+
+    <div id="mobileDrawer" class="mobile-nav-card">
+        <div class="card-inner">
+            <a href="index.html" class="card-link"style="background: var(--accent-pink); color: white; margin-top: 10px;">
+                <span class="material-symbols-outlined">home</span>Accueil
+            </a>
+            <a href="donut.html" class="card-link">
+                <span class="material-symbols-outlined">restaurant_menu</span>La Carte
+            </a>
+            <a href="panier.html" class="card-link">
+                <span class="material-symbols-outlined">shopping_bag</span>Mon Panier
+            </a>
+            <a href="histoire.html" class="card-link">
+                <span class="material-symbols-outlined">history_edu</span>Histoire
+            </a>
+            <a href="evenement.html" class="card-link">
+                <span class="material-symbols-outlined">celebration</span>Evènement
+            </a>
+
+              <a href="favoris.html" class="card-link">
+                <span class="material-symbols-outlined">favorite</span>Favoris
+            </a>
+
+
+            <a href="#" class="card-link" >
+                <span class="material-symbols-outlined">shopping_cart_checkout</span>Commander
+            </a>
+        </div>
+    </div>
+
+   <div class="hero-content">
+    <h1 class="hero-title">L'Art de la Gourmandise.</h1>
+    <p class="hero-subtitle">
+        Succombez à l'équilibre parfait entre l'excellence de la haute pâtisserie et l'authenticité d'un savoir-faire artisanal.
+    </p>
+    <div class="hero-btns">
+        <a href="donut.html" class="btn-primary-solid">Découvrir la collection</a>
+        <button class="btn-outline-white">
+            <span class="material-symbols-outlined">play_circle</span> Notre héritage
+        </button>
+    </div>
+
+
+</div>
+<div class="fade-overlay"></div>
+</header>
+
+<main class="container" style="padding: 4rem 2rem;">
+    <h2 style="text-align: center; margin-bottom: 3rem; font-weight: 800; font-size: 2rem;">Best sellers</h2>
+
+    <div class="bakery-grid">
+        <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d11_modifie.png" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Donuts Mms</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d2.jpg" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Matcha Zen</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d7_modifie.png" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Honey Glaze</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
+            </div>
+        </div>
+
+          <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d9_modifie.png" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Donuts Mms</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d10µ.jpg" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Matcha Zen</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d8.jpg" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Honey Glaze</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</main>
+<section class="faq-section">
+    <div class="container-small">
+        <h2 class="serif">Questions Fréquentes</h2>
+        
+        <div class="faq-item">
+            <button class="faq-question">
+                Vos donuts conviennent-ils aux personnes allergiques aux noix ?
+                <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-answer">
+                <p>Bien que nous fassions très attention, tous nos produits sont préparés dans un environnement manipulant des fruits à coque.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Est-ce que tous les produits de Chez Biscuit sont adaptés aux végétaliens ?
+                <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-answer">
+                <p>Nous proposons une large gamme de donuts et bento cakes 100% vegan sans compromis sur le goût.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Puis-je commander en ligne et récupérer ma commande en boutique ?
+                <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-answer">
+                <p>Oui, choisissez l'option "Click & Collect" au moment du paiement pour retirer votre commande gratuitement.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Où sont fabriqués vos produits ?
+                <span class="material-symbols-outlined">expand_more</span>
+            </button>
+            <div class="faq-answer">
+                <p>Tous nos produits sont fabriqués localement dans notre atelier principal.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            
+            <div class="footer-col branding">
+                <div class="footer-logo">
+                     <a href="index.html" style="text-decoration: none; color: inherit;">
+        <!-- Remplacement de ChezBiskuit pour matcher exactement l'image -->
+        <span class="logo-text" style="line-height: 1.7;">B<span>!</span>SKU<span>i</span>T</span>
+    </a>
+                    <span class="logo-subtext">HAUTE BEIGNETERIE</span>
+                </div>
+                <p class="footer-tagline">L'art du donut artisanal, façonné à la main chaque matin pour vos moments d'exception.</p>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/biskuit_conflans/reels/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@homedonutsconflans" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-snapchat"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">La Maison</h4>
+                <ul class="footer-links">
+                    <li><a href="donut.html"><span class="material-symbols-outlined">chevron_right</span>La Collection</a></li>
+                    <li><a href="histoire.html"><span class="material-symbols-outlined">chevron_right</span>Notre Atelier</a></li>
+                    <li><a href="evenement.html"><span class="material-symbols-outlined">chevron_right</span>Privatisation</a></li>
+                    <li><a href="#"><span class="material-symbols-outlined">chevron_right</span>Devenir Franchisé</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Contact</h4>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <span class="material-symbols-outlined">location_on</span>
+                        <p>42 Av. Carnot, Conflans-Sainte-Honorine</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="material-symbols-outlined">schedule</span>
+                        <p>Mar - Dim : 10h00 - 19h00</p>
+                    </div>
+                    <div class="info-item">
+                        <span class="material-symbols-outlined">mail</span>
+                        <p>bonjour@Biscuit.fr</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Newsletter</h4>
+                <p class="news-text">Rejoignez le club pour recevoir nos créations éphémères en avant-première.</p>
+                <div class="newsletter-group">
+                    <input type="email" placeholder="Votre adresse mail..." class="news-input">
+                    <button class="news-btn">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Chez Biscuit. Créé avec passion.</p>
+            <div class="footer-legal">
+                <a href="#">CGV</a>
+                <a href="#">Politique de cookies</a>
+                <a href="#">Mentions</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const navbar = document.getElementById('mainNavbar');
+        const openBtn = document.getElementById('openBtn');
+        const drawer = document.getElementById('mobileDrawer');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        openBtn.onclick = (e) => {
+            e.stopPropagation();
+            drawer.classList.toggle('active');
+            openBtn.innerText = drawer.classList.contains('active') ? 'close' : 'menu';
+        };
+
+        document.addEventListener('click', (e) => {
+            if (!drawer.contains(e.target) && e.target !== openBtn) {
+                drawer.classList.remove('active');
+                openBtn.innerText = 'menu';
+            }
+        });
+    });
+
+    // LOGIQUE FAQ (ACCORDÉON)
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        // Optionnel : Fermer les autres questions ouvertes
+        faqItems.forEach(i => i.classList.remove('active')); 
+        
+        if (!isActive) item.classList.add('active'); 
+    });
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const chatbotToggler = document.querySelector(".chatbot-toggler");
+    const iconChat = document.querySelector(".icon-chat");
+    const iconClose = document.querySelector(".icon-close");
+    const chatInput = document.querySelector(".chat-input textarea");
+    const sendChatBtn = document.querySelector("#send-btn");
+    const chatbox = document.querySelector(".chatbox");
+
+    // FONCTION OUVERTURE / FERMETURE
+    chatbotToggler.addEventListener("click", () => {
+        document.body.classList.toggle("show-chatbot");
+        
+        // Change l'icône (petit switch entre l'étoile et la croix)
+        if (document.body.classList.contains("show-chatbot")) {
+            iconChat.style.display = "none";
+            iconClose.style.display = "block";
+        } else {
+            iconChat.style.display = "block";
+            iconClose.style.display = "none";
+        }
+    });
+
+    const createChatLi = (message, className) => {
+        const chatLi = document.createElement("li");
+        chatLi.classList.add("chat", className);
+        chatLi.innerHTML = `<p>${message}</p>`;
+        return chatLi;
+    }
+
+    const handleChat = () => {
+        const userMessage = chatInput.value.trim();
+        if(!userMessage) return;
+        chatInput.value = "";
+
+        // Message Utilisateur
+        chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+
+        // Réponse IA simulée
+        setTimeout(() => {
+            const incomingChatLi = createChatLi("Je prépare votre réponse... ✨", "incoming");
+            chatbox.appendChild(incomingChatLi);
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+
+            setTimeout(() => {
+                incomingChatLi.querySelector("p").textContent = "C'est noté ! Un de nos chefs pâtissiers va vous répondre d'ici quelques instants. En attendant, nos donuts Mms sont en promotion ! 🍩";
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+            }, 1000);
+        }, 500);
+    }
+
+    sendChatBtn.addEventListener("click", handleChat);
+    
+    // Envoyer avec la touche Entrée
+    chatInput.addEventListener("keydown", (e) => {
+        if(e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleChat();
+        }
+    });
+});
+
+   
+</script>
+
+</body>
+</html>
