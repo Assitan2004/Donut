@@ -739,45 +739,7 @@
     z-index: 15; /* S'assure que le dégradé passe bien au-dessus de la vidéo */
 }
 
-/* --- VERSION FINALE CHATBOT RESPONSIVE --- */
-@media (max-width: 650px) {
-    body.show-chatbot {
-        overflow: hidden !important; /* Empêche le site de défiler derrière le chat */
-    }
 
-    .chatbot {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100vh !important; /* Force à prendre la hauteur totale réelle de l'écran */
-        max-height: 100vh !important;
-        border-radius: 0 !important;
-        border: none !important;
-        display: flex !important;
-        flex-direction: column !important;
-        z-index: 99999 !important; /* S'assure que rien ne passe par-dessus */
-        background: #fff !important; /* Force le fond blanc opaque pour cacher les donuts derrière */
-    }
-
-    .chatbot header {
-        flex-shrink: 0 !important;
-    }
-
-    .chatbot .chatbox {
-        flex: 1 !important; /* Force la boîte à occuper 100% de l'espace vide disponible */
-        height: auto !important;
-        overflow-y: auto !important;
-        padding: 20px !important;
-    }
-
-    .chatbot .chat-input {
-        flex-shrink: 0 !important;
-        background: #fff !important;
-        border-top: 1px solid rgba(0,0,0,0.08) !important;
-        padding: 15px 20px !important;
-    }
-}
     </style>
 </head>
 <body>
@@ -836,9 +798,7 @@
             </a>
 
 
-            <a href="#" class="card-link" >
-                <span class="material-symbols-outlined">shopping_cart_checkout</span>Commander
-            </a>
+           
         </div>
     </div>
 
