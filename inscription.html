@@ -10,12 +10,12 @@
 
     <style>
         :root {
-            --accent-pink: #f43484; 
+            --accent-pink: #88051E ; 
             --btn-dark: #1a1a1a;
             --text-dark: #1A1A1A;
             --input-border: #e2e8f0;
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            --chat-gradient: linear-gradient(135deg, #f43484 0%, #ff7eb3 100%);
+            --chat-gradient: #88051E ;
             --glass-bg: rgba(255, 255, 255, 0.85);
             --border-soft: #f1f5f9;
             --white: #ffffff;
@@ -252,7 +252,7 @@
 
         .footer-socials { display: flex; gap: 12px; }
         .social-link {
-            width: 40px; height: 40px; background: #ffffff; color: #f43484 !important;
+            width: 40px; height: 40px; background: #ffffff; color: #88051E !important;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             text-decoration: none; transition: 0.3s ease;
         }
@@ -272,7 +272,7 @@
         .news-text { font-size: 14px; margin-bottom: 20px; opacity: 0.9; }
         .newsletter-group { display: flex; background: #ffffff; border-radius: 50px; padding: 5px 5px 5px 20px; align-items: center; }
         .news-input { flex: 1; border: none; background: none; outline: none; padding: 10px 0; font-size: 14px; color: #333; font-family: 'Inter', sans-serif; }
-        .news-btn { background: #f43484; color: #ffffff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .news-btn { background: #88051E ; color: #ffffff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
         .news-btn:hover { background: #1A1A1A; }
 
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.2); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
@@ -292,40 +292,7 @@
             .footer-legal a { margin: 0; }
         }
 
-        /* --- CHATBOT --- */
-        .chatbot-toggler {
-            position: fixed;
-            bottom: 35px; right: 35px;
-            height: 65px; width: 65px;
-            color: #fff;
-            background: var(--chat-gradient);
-            border: none;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 22px;
-            cursor: pointer;
-            box-shadow: 0 15px 35px rgba(244, 52, 132, 0.3);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 3000;
-        }
-        .chatbot-toggler:hover { transform: translateY(-5px) rotate(8deg); box-shadow: 0 20px 40px rgba(244, 52, 132, 0.4); }
-
-        .chatbot {
-            position: fixed;
-            right: 35px; bottom: 120px;
-            width: 400px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 30px;
-            overflow: hidden;
-            opacity: 0; pointer-events: none;
-            transform: translateY(40px) scale(0.8);
-            transform-origin: bottom right;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 3000;
-        }
+       
         body.show-chatbot .chatbot { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
         .chatbot header { background: var(--chat-gradient); padding: 25px; color: #fff; }
         .chatbot header h2 { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.5px; }
@@ -354,7 +321,6 @@
         <a href="histoire.html" class="card-link"><span class="material-symbols-outlined">history_edu</span>Histoire</a>
         <a href="evenement.html" class="card-link"><span class="material-symbols-outlined">celebration</span>Evènement</a>
         <a href="favoris.html" class="card-link"><span class="material-symbols-outlined">favorite</span>Favoris</a>
-        <a href="#" class="card-link card-link-cta"><span class="material-symbols-outlined">shopping_cart_checkout</span>Commander</a>
     </div>
 </div>
 
@@ -375,7 +341,7 @@
         <div class="nav-right">
             <a href="favoris.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">favorite</span></a>
             <a href="panier.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">shopping_bag</span></a>
-            <a href="connexion.html" style="color: inherit;"><span class="material-symbols-outlined">person</span></a>
+            <a href="connexion.html" style="color: #88051E ;"><span class="material-symbols-outlined">person</span></a>
         </div>
     </div>
 </nav>
