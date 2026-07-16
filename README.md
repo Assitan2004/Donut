@@ -16,6 +16,8 @@ Page Favoris : Affichage dynamique des produits coups de cœur avec JavaScript.
 <img src="https://github.com/user-attachments/assets/d9bd7cff-42d2-4c6e-985f-83288152b6a2" alt="Mes Favoris" width="600" />
 
 Fiche Produit : Gestion des quantités (+ / -), ajout au panier et suggestions de produits.
+<img src="https://github.com/user-attachments/assets/5cbc2aa8-0ff5-4b8b-b2fd-e887ee4ead09" alt="Détail Produit" width="600" />
+
 
 Panier fonctionnel : Sauvegarde des choix de l'utilisateur grâce au localStorage (les produits restent dans le panier même si on actualise la page).
 
