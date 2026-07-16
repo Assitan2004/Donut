@@ -1,8 +1,8 @@
-# ☕ Chez Biscuit - Salon de thé & Donuterie
+Chez Biscuit - Salon de thé & Donuterie
 
 Un projet front-end pour un salon de thé et une boutique de donuts artisanaux. Le but était de créer un site moderne, rapide et entièrement responsive.
 
-👉 **[Voir le site en ligne](https://ton-pseudo.github.io/chez-biscuit/)** *(Pense à remplacer par ton lien GitHub Pages !)*
+👉 **[Voir le site en ligne](https://assitan2004.github.io/Donut/)** 
 
 ---
 
@@ -20,7 +20,7 @@ Le projet est composé de plusieurs pages pour offrir une expérience complète 
 
 ---
 
-## 🛠️ Ce que fait le site (Fonctionnalités)
+##  Ce que fait le site (Fonctionnalités)
 
 * **Page d'Accueil :** Présentation de la boutique avec une vidéo en arrière-plan et la liste des Best Sellers.
   <br><br>
