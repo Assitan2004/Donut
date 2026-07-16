@@ -20,6 +20,8 @@ Fiche Produit : Gestion des quantités (+ / -), ajout au panier et suggestions d
 
 
 Panier fonctionnel : Sauvegarde des choix de l'utilisateur grâce au localStorage (les produits restent dans le panier même si on actualise la page).
+<img width="600" alt="panier" src="https://github.com/user-attachments/assets/cb3dcc1c-dc54-4904-98e5-8b129339a6f0" />
+
 
 Toasts de confirmation : Petites alertes en bas de l'écran quand on ajoute un produit ou qu'on modifie les favoris.
 
