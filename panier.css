@@ -626,6 +626,12 @@
 .footer-legal a { color: #fff; text-decoration: none; margin-left: 20px; opacity: 0.8; }
 .footer-legal a:hover { opacity: 1; }
 
+/* Force la couleur noire pour le bouton du code promo */
+.promo-row button {
+    color: #1A1A1A !important;
+    background-color: #fff;
+    border: 1px solid #ccc; /* Ou la couleur de bordure souhaitée */
+}
 @media (max-width: 1024px) {
     .footer-grid {
         grid-template-columns: 1fr 1fr; 
